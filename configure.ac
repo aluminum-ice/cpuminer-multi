@@ -8,6 +8,9 @@ AC_CONFIG_MACRO_DIR([m4])
 
 AM_INIT_AUTOMAKE([foreign subdir-objects])
 
+dnl Libtool init checks.
+LT_INIT([pic-only])
+
 dnl Make sure anyone changing configure.ac/Makefile.am has a clue
 AM_MAINTAINER_MODE
 
@@ -141,7 +144,7 @@ if test x$request_jansson = xtrue ; then
 else
 	JANSSON_LIBS=-ljansson
 fi
-
+SECP256K1_LIBS=-llibsecp256k1
 # libcurl install path (for mingw : --with-curl=/usr/local)
 AC_ARG_WITH([curl],
    [  --with-curl=PATH         prefix where curl is installed [default=/usr]])

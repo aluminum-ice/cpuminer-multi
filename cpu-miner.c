@@ -91,6 +91,7 @@ enum algos {
 	ALGO_BLAKE2S,     /* Blake2s */
 	ALGO_BMW,         /* BMW 256 */
 	ALGO_C11,         /* C11 Chaincoin/Flaxcoin X11 variant */
+	ALGO_CURVEHASH,	
 	ALGO_CRYPTOLIGHT, /* cryptonight-light (Aeon) */
 	ALGO_CRYPTONIGHT, /* CryptoNight */
 	ALGO_DECRED,      /* Decred */
@@ -142,7 +143,6 @@ enum algos {
 	ALGO_XEVAN,
 	ALGO_YESCRYPT,
 	ALGO_ZR5,
-    ALGO_CURVEHASH,
 	ALGO_COUNT
 };
 
@@ -161,6 +161,7 @@ static const char *algo_names[] = {
 	"blake2s",
 	"bmw",
 	"c11",
+	"curvehash",
 	"cryptolight",
 	"cryptonight",
 	"decred",
@@ -212,7 +213,6 @@ static const char *algo_names[] = {
 	"xevan",
 	"yescrypt",
 	"zr5",
-    "curvehash",
 	"\0"
 };
 
@@ -326,6 +326,7 @@ Options:\n\
                           blake2s      Blake2-S (256)\n\
                           bmw          BMW 256\n\
                           c11/flax     C11\n\
+			  curvehash    curveHash\n\
                           cryptolight  Cryptonight-light\n\
                           cryptonight  Monero\n\
                           decred       Blake-256 14-rounds 180 bytes\n\
@@ -379,7 +380,7 @@ Options:\n\
                           xevan        Xevan (BitSend)\n\
                           yescrypt     Yescrypt\n\
                           zr5          ZR5\n\
-                          curvehash    curveHash\n\
+                          
   -o, --url=URL         URL of mining server\n\
   -O, --userpass=U:P    username:password pair for mining server\n\
   -u, --user=USERNAME   username for mining server\n\

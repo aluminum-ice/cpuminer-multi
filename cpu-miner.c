@@ -3431,6 +3431,7 @@ static void show_credits()
 {
 	printf("** " PACKAGE_NAME " " PACKAGE_VERSION " by tpruvot@github **\n");
 	printf("BTC donation address: 1FhDPLPpw18X4srecguG3MxJYe4a1JsZnd (tpruvot)\n\n");
+	printf("DOGE donation address: DCMNt6KxnFj26oPeAix96YfWihSP6wvaCJ (Rumah Code)\n\n");
 }
 
 void get_defconfig_path(char *out, size_t bufsize, char *argv0);

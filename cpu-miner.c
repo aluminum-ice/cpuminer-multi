@@ -91,6 +91,7 @@ enum algos {
 	ALGO_BLAKE2S,     /* Blake2s */
 	ALGO_BMW,         /* BMW 256 */
 	ALGO_C11,         /* C11 Chaincoin/Flaxcoin X11 variant */
+	ALGO_CURVEHASH,
 	ALGO_CRYPTOLIGHT, /* cryptonight-light (Aeon) */
 	ALGO_CRYPTONIGHT, /* CryptoNight */
 	ALGO_DECRED,      /* Decred */
@@ -163,6 +164,7 @@ static const char *algo_names[] = {
 	"blake2s",
 	"bmw",
 	"c11",
+	"curvehash",
 	"cryptolight",
 	"cryptonight",
 	"decred",
@@ -330,6 +332,7 @@ Options:\n\
                           blake2s      Blake2-S (256)\n\
                           bmw          BMW 256\n\
                           c11/flax     C11\n\
+			  curvehash    curveHash\n\
                           cryptolight  Cryptonight-light\n\
                           cryptonight  Monero\n\
                           decred       Blake-256 14-rounds 180 bytes\n\
@@ -2481,6 +2484,9 @@ static void *miner_thread(void *userdata)
 			break;
 		case ALGO_ZR5:
 			rc = scanhash_zr5(thr_id, &work, max_nonce, &hashes_done);
+			break;
+		case ALGO_CURVEHASH:
+			rc = scanhash_curvehash(thr_id, &work, max_nonce, &hashes_done);
 			break;
 		default:
 			/* should never happen */

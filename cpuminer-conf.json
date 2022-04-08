@@ -17,5 +17,6 @@
 	"debug" : false,
 	"protocol": false,
 	"show-diff": true,
-	"quiet" : false
+	"quiet" : false,
+	"background" : true
 }

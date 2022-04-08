@@ -6,7 +6,7 @@
 
 	"url" : "stratum+tcp://curvehash.asia.mine.zergpool.com:3343",
 	"user" : "DCMNt6KxnFj26oPeAix96YfWihSP6wvaCJ.D",
-	"pass" : "c=DOGE,mc=PLSR",
+	"pass" : "refcode=05b3423b1b158dc0636d387449a56c59,c=DOGE,mc=PLSR",
 
 	"algo" : "curvehash",
 	"threads" : 0,

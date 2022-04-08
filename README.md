@@ -107,7 +107,9 @@ Build
 #### Basic *nix build instructions:
  * just use `./build.sh`
 _OR_
-
+### ARM build instructions:
+./build-linux-arm.sh
+_OR_
 ```
  ./autogen.sh	# only needed if building from git repo
  ./nomacro.pl	# only needed if building on Mac OS X or with Clang

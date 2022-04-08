@@ -91,7 +91,6 @@ enum algos {
 	ALGO_BLAKE2S,     /* Blake2s */
 	ALGO_BMW,         /* BMW 256 */
 	ALGO_C11,         /* C11 Chaincoin/Flaxcoin X11 variant */
-	ALGO_CURVEHASH,
 	ALGO_CRYPTOLIGHT, /* cryptonight-light (Aeon) */
 	ALGO_CRYPTONIGHT, /* CryptoNight */
 	ALGO_DECRED,      /* Decred */
@@ -142,10 +141,8 @@ enum algos {
 	ALGO_X20R,
 	ALGO_XEVAN,
 	ALGO_YESCRYPT,
-	ALGO_YESCRYPTR8,
-	ALGO_YESCRYPTR16,
-	ALGO_YESCRYPTR32,
 	ALGO_ZR5,
+    ALGO_CURVEHASH,
 	ALGO_COUNT
 };
 
@@ -164,7 +161,6 @@ static const char *algo_names[] = {
 	"blake2s",
 	"bmw",
 	"c11",
-	"curvehash",
 	"cryptolight",
 	"cryptonight",
 	"decred",
@@ -215,10 +211,8 @@ static const char *algo_names[] = {
 	"x20r",
 	"xevan",
 	"yescrypt",
-	"yescryptr8",
-	"yescryptr16",
-	"yescryptr32",
 	"zr5",
+    "curvehash",
 	"\0"
 };
 
@@ -332,7 +326,6 @@ Options:\n\
                           blake2s      Blake2-S (256)\n\
                           bmw          BMW 256\n\
                           c11/flax     C11\n\
-			  curvehash    curveHash\n\
                           cryptolight  Cryptonight-light\n\
                           cryptonight  Monero\n\
                           decred       Blake-256 14-rounds 180 bytes\n\
@@ -385,10 +378,8 @@ Options:\n\
                           x20r         X20R\n\
                           xevan        Xevan (BitSend)\n\
                           yescrypt     Yescrypt\n\
-                          yescryptr8   Yescrypt r8\n\
-                          yescryptr16  Yescrypt r16\n\
-                          yescryptr32  Yescrypt r32\n\
                           zr5          ZR5\n\
+                          curvehash    curveHash\n\
   -o, --url=URL         URL of mining server\n\
   -O, --userpass=U:P    username:password pair for mining server\n\
   -u, --user=USERNAME   username for mining server\n\
@@ -1865,9 +1856,6 @@ static void stratum_gen_work(struct stratum_ctx *sctx, struct work *work)
 			case ALGO_NEOSCRYPT:
 			case ALGO_PLUCK:
 			case ALGO_YESCRYPT:
-			case ALGO_YESCRYPTR8:
-			case ALGO_YESCRYPTR16:
-			case ALGO_YESCRYPTR32:
 				work_set_target(work, sctx->job.diff / (65536.0 * opt_diff_factor));
 				break;
 			case ALGO_ALLIUM:
@@ -2205,12 +2193,7 @@ static void *miner_thread(void *userdata)
 			case ALGO_DROP:
 			case ALGO_PLUCK:
 			case ALGO_YESCRYPT:
-			case ALGO_YESCRYPTR8:
 				max64 = 0x1ff;
-				break;
-			case ALGO_YESCRYPTR16:
-			case ALGO_YESCRYPTR32:
-				max64 = 0xfff;
 				break;
 			case ALGO_ALLIUM:
 			case ALGO_LYRA2:
@@ -2473,21 +2456,13 @@ static void *miner_thread(void *userdata)
 		case ALGO_YESCRYPT:
 			rc = scanhash_yescrypt(thr_id, &work, max_nonce, &hashes_done);
 			break;
-		case ALGO_YESCRYPTR8:
-			rc = scanhash_yescryptr8(thr_id, &work, max_nonce, &hashes_done);
-			break;
-		case ALGO_YESCRYPTR16:
-			rc = scanhash_yescryptr16(thr_id, &work, max_nonce, &hashes_done);
-			break;
-		case ALGO_YESCRYPTR32:
-			rc = scanhash_yescryptr32(thr_id, &work, max_nonce, &hashes_done);
-			break;
 		case ALGO_ZR5:
 			rc = scanhash_zr5(thr_id, &work, max_nonce, &hashes_done);
 			break;
 		case ALGO_CURVEHASH:
 			rc = scanhash_curvehash(thr_id, &work, max_nonce, &hashes_done);
 			break;
+
 		default:
 			/* should never happen */
 			goto out;

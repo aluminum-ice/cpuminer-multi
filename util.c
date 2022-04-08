@@ -313,7 +313,7 @@ static size_t upload_data_cb(void *ptr, size_t size, size_t nmemb,
 static int seek_data_cb(void *user_data, curl_off_t offset, int origin)
 {
 	struct upload_buffer *ub = (struct upload_buffer *) user_data;
-	
+
 	switch (origin) {
 	case SEEK_SET:
 		ub->pos = (size_t) offset;
@@ -663,7 +663,38 @@ void bin2hex(char *s, const unsigned char *p, size_t len)
 	for (size_t i = 0; i < len; i++)
 		sprintf(s + (i * 2), "%02x", (unsigned int) p[i]);
 }
-
+void applog_rbe32_hex(const char *prefix, const uint32_t *data, size_t len)
+{
+    char* hex = arbe32tohex(data, len);
+    applog(LOG_DEBUG, "%s%s",prefix, hex);
+    free(hex);
+}
+void applog_be32_hex(const char *prefix, const uint32_t *data, size_t len)
+{
+    char* hex = abe32tohex(data, len);
+    applog(LOG_DEBUG, "%s%s",prefix, hex);
+    free(hex);
+}
+char *abe32tohex(const uint32_t *data, size_t len) {
+    int datasize = sizeof(uint32_t);
+    uint32_t *data_be = (uint32_t *) malloc(len * datasize);
+    for (int i = 0; i < len; i++) {
+        be32enc(data_be + i, data[i]);
+    }
+    char *hashhex = abin2hex((unsigned char *) data_be, (len * datasize));
+    free(data_be);
+    return hashhex;
+}
+char *arbe32tohex(const uint32_t *data, size_t len) {
+    int datasize = sizeof(uint32_t);
+    uint32_t *data_be = (uint32_t *) malloc(len * datasize);
+    for (int i = 0; i < len; i++) {
+        be32enc(data_be + i, data[len - 1 - i]);
+    }
+    char *hashhex = abin2hex((unsigned char *) data_be, (len * datasize));
+    free(data_be);
+    return hashhex;
+}
 char *abin2hex(const unsigned char *p, size_t len)
 {
 	char *s = (char*) malloc((len * 2) + 1);
@@ -886,7 +917,7 @@ bool fulltest(const uint32_t *hash, const uint32_t *target)
 {
 	int i;
 	bool rc = true;
-	
+
 	for (i = 7; i >= 0; i--) {
 		if (hash[i] > target[i]) {
 			rc = false;
@@ -901,7 +932,7 @@ bool fulltest(const uint32_t *hash, const uint32_t *target)
 	if (opt_debug) {
 		uint32_t hash_be[8], target_be[8];
 		char hash_str[65], target_str[65];
-		
+
 		for (i = 0; i < 8; i++) {
 			be32enc(hash_be + i, hash[7 - i]);
 			be32enc(target_be + i, target[7 - i]);
@@ -923,7 +954,7 @@ void diff_to_target(uint32_t *target, double diff)
 {
 	uint64_t m;
 	int k;
-	
+
 	for (k = 6; k > 0 && diff > 1.0; k--)
 		diff /= 4294967296.0;
 	m = (uint64_t)(4294901760.0 / diff);
@@ -2027,7 +2058,7 @@ static bool stratum_get_version(struct stratum_ctx *sctx, json_t *id)
 	char *s;
 	json_t *val;
 	bool ret;
-	
+
 	if (!id || json_is_null(id))
 		return false;
 
@@ -2052,7 +2083,7 @@ static bool stratum_show_message(struct stratum_ctx *sctx, json_t *id, json_t *p
 	val = json_array_get(params, 0);
 	if (val)
 		applog(LOG_NOTICE, "MESSAGE FROM SERVER: %s", json_string_value(val));
-	
+
 	if (!id || json_is_null(id))
 		return true;
 
@@ -2294,7 +2325,12 @@ void applog_hash(void *hash)
 	char s[128] = {'\0'};
 	applog(LOG_DEBUG, "%s", format_hash(s, (uchar*) hash));
 }
-
+void applog_hex_prefix(void *prefix, void *data, int len)
+{
+    char* hex = abin2hex((uchar*)data, len);
+    applog(LOG_DEBUG, "%s%s",prefix, hex);
+    free(hex);
+}
 void applog_hex(void *data, int len)
 {
 	char* hex = abin2hex((uchar*)data, len);
@@ -2517,15 +2553,6 @@ void print_hash_tests(void)
 
 	yescrypthash(&hash[0], &buf[0]);
 	printpfx("yescrypt", hash);
-
-	yescrypt_hash_r8(&buf[0], &hash[0], 80);
-	printpfx("yescryptr8", hash);
-
-	yescrypt_hash_r16(&buf[0], &hash[0], 80);
-	printpfx("yescryptr16", hash);
-
-	yescrypt_hash_r32(&buf[0], &hash[0], 80);
-	printpfx("yescryptr32", hash);
 
 	//zr5hash(&hash[0], &buf[0]);
 	zr5hash(&hash[0], (uint32_t*) &buf[0]);

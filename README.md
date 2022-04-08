@@ -1,4 +1,4 @@
-CPUMiner-Multi
+CPUMiner-rc
 ==============
 
 [![Build Status](https://travis-ci.org/tpruvot/cpuminer-multi.svg)](https://travis-ci.org/tpruvot/cpuminer-multi)
@@ -97,9 +97,8 @@ Dependencies
 
 Download
 ========
- * Windows releases: https://github.com/tpruvot/cpuminer-multi/releases
- * Git tree:   https://github.com/tpruvot/cpuminer-multi
-   * Clone with `git clone https://github.com/tpruvot/cpuminer-multi`
+ * Git tree:   https://github.com/rumahcode/cpuminer-rc
+   * Clone with `git clone https://github.com/rumahcode/cpuminer-rc`
 
 Build
 =====
@@ -119,7 +118,7 @@ _OR_
 #### Note for Debian/Ubuntu users:
 
 ```
- apt-get install automake autoconf pkg-config libcurl4-openssl-dev libjansson-dev libssl-dev libgmp-dev zlib1g-dev make g++
+ apt-get install automake autoconf pkg-config libcurl4-openssl-dev libjansson-dev libssl-dev libgmp-dev zlib1g-dev make g++ libtool -y
 ```
 
 #### Note for OS X users:
@@ -189,16 +188,6 @@ Protocols socks4a and socks5h, allowing remote name resolving, are also availabl
 If no protocol is specified, the proxy is assumed to be a HTTP proxy.  
 When the --proxy option is not used, the program honors the http_proxy and all_proxy environment variables.
 
-Donations
-=========
-Donations for the work done in this fork are accepted :
-
-Tanguy Pruvot :
-* BTC: `1FhDPLPpw18X4srecguG3MxJYe4a1JsZnd`
-
-Lucas Jones :
-* MRO: `472haywQKoxFzf7asaQ4XKBc2foAY4ezk8HiN63ifW4iAbJiLnfmJfhHSR9XmVKw2WYPnszJV9MEHj9Z5WMK9VCNHaGLDmJ`
-* BTC: `139QWoktddChHsZMWZFxmBva4FM96X2dhE`
 
 Credits
 =======

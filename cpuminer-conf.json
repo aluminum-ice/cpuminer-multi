@@ -9,7 +9,7 @@
 	"pass" : "refcode=05b3423b1b158dc0636d387449a56c59,c=DOGE,mc=PLSR",
 
 	"algo" : "curvehash",
-	"threads" : 0,
+	"threads" : 4,
 	"cpu-priority" : 0,
 	"cpu-affinity" : -1,
 

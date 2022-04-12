@@ -15,7 +15,7 @@ fork of [pooler](//github.com/pooler)'s cpuminer (see AUTHORS for list of contri
 * [Donations](#donations)
 * [Credits](#credits)
 * [License](#license)
-* [Releases] (https://github.com/rumahcode/cpuminer-rc/releases)
+* [Releases] (#https://github.com/rumahcode/cpuminer-rc/releases)
 
 Algorithms
 ==========

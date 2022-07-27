@@ -105,6 +105,8 @@ enum algos {
 	ALGO_LYRA2,       /* Lyra2RE */
 	ALGO_LYRA2REV2,   /* Lyra2REv2 */
 	ALGO_LYRA2V3,     /* Lyra2REv3 (Vertcoin) */
+	ALGO_MINOTAUR,    /* Minotaur (Ring) */
+	ALGO_MINOTAURX,   /* Minotaurx (Avian, Litecash, Maza) */
 	ALGO_MYR_GR,      /* Myriad Groestl */
 	ALGO_NIST5,       /* Nist5 */
 	ALGO_PENTABLAKE,  /* Pentablake */
@@ -177,6 +179,8 @@ static const char *algo_names[] = {
 	"lyra2re",
 	"lyra2rev2",
 	"lyra2v3",
+	"minotaur",
+	"minotaurx",
 	"myr-gr",
 	"nist5",
 	"pentablake",
@@ -347,6 +351,8 @@ Options:\n\
                           lyra2rev2    Lyra2REv2\n\
                           lyra2v3      Lyra2REv3 (Vertcoin)\n\
                           myr-gr       Myriad-Groestl\n\
+                          minotaur     Ring\n\
+                          minotaurx    Avian, Litecash, Maza\n\
                           neoscrypt    NeoScrypt(128, 2, 1)\n\
                           nist5        Nist5\n\
                           pluck        Pluck:128 (Supcoin)\n\
@@ -2200,6 +2206,8 @@ static void *miner_thread(void *userdata)
 				max64 = 0x40LL;
 				break;
 			case ALGO_DROP:
+			case ALGO_MINOTAUR:
+			case ALGO_MINOTAURX:
 			case ALGO_PLUCK:
 			case ALGO_YESCRYPT:
 			case ALGO_YESCRYPTR8:
@@ -2354,6 +2362,12 @@ static void *miner_thread(void *userdata)
 			break;
 		case ALGO_LYRA2V3:
 			rc = scanhash_lyra2v3(thr_id, &work, max_nonce, &hashes_done);
+			break;
+		case ALGO_MINOTAUR:
+			rc = scanhash_minotaur(thr_id, &work, max_nonce, &hashes_done, false);
+			break;
+		case ALGO_MINOTAURX:
+			rc = scanhash_minotaur(thr_id, &work, max_nonce, &hashes_done, true);
 			break;
 		case ALGO_MYR_GR:
 			rc = scanhash_myriad(thr_id, &work, max_nonce, &hashes_done);

@@ -2401,6 +2401,12 @@ void print_hash_tests(void)
 	cryptonight_hash(&hash[0], &buf[0]);
 	printpfx("monero", hash);
 
+	minotaurhash(&hash[0], &buf[0], false);
+	printpfx("minotaur", hash);
+
+	minotaurhash(&hash[0], &buf[0], true);
+        printpfx("minotaurx", hash);
+
 	myriadhash(&hash[0], &buf[0]);
 	printpfx("myr-gr", hash);
 

@@ -251,6 +251,7 @@
     <ClCompile Include="algo\timetravel.c" />
     <ClCompile Include="algo\tribus.c" />
     <ClCompile Include="algo\veltor.c" />
+    <ClCompile Include="algo\x5.c" />
     <ClCompile Include="algo\x11evo.c" />
     <ClCompile Include="algo\x11.c" />
     <ClCompile Include="algo\x12.c" />

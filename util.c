@@ -2481,6 +2481,9 @@ void print_hash_tests(void)
 	xevan_hash(&hash[0], &buf[0]);
 	printpfx("xevan", hash);
 
+        x5hash(&hash[0], &buf[0]);
+        printpfx("x5", hash);
+
 	x11evo_hash(&hash[0], &buf[0]);
 	printpfx("x11evo", hash);
 

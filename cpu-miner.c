@@ -132,6 +132,7 @@ enum algos {
 	ALGO_VELTOR,      /* Skein Shavite Shabal Streebog */
 	ALGO_X11EVO,      /* Permuted X11 */
 	ALGO_X11,         /* X11 */
+	ALGO_X11K,        /* X11K */
 	ALGO_X12,
 	ALGO_X13,         /* X13 */
 	ALGO_X14,         /* X14 */
@@ -206,6 +207,7 @@ static const char *algo_names[] = {
 	"veltor",
 	"x11evo",
 	"x11",
+	"x11k",
 	"x12",
 	"x13",
 	"x14",
@@ -377,6 +379,7 @@ Options:\n\
                           vanilla      Blake-256 8-rounds\n\
                           x11evo       Permuted x11\n\
                           x11          X11\n\
+                          x11k         X11K (Kyanite / Sapphire)\n\
                           x12          X12\n\
                           x13          X13\n\
                           x14          X14\n\
@@ -2451,6 +2454,9 @@ static void *miner_thread(void *userdata)
 		case ALGO_X11:
 			rc = scanhash_x11(thr_id, &work, max_nonce, &hashes_done);
 			break;
+		case ALGO_X11K:
+			rc = scanhash_x11k(thr_id, &work, max_nonce, &hashes_done);
+			break;
 		case ALGO_X12:
 			rc = scanhash_x12(thr_id, &work, max_nonce, &hashes_done);
 			break;
@@ -3469,6 +3475,7 @@ static void show_credits()
 void get_defconfig_path(char *out, size_t bufsize, char *argv0);
 
 int main(int argc, char *argv[]) {
+
 	struct thr_info *thr;
 	long flags;
 	int i, err;

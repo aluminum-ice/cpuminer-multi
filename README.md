@@ -44,6 +44,8 @@ Algorithms
  * ✓ __lyra2RE__ (Cryptocoin)
  * ✓ __lyra2REv2__
  * ✓ __lyra2REv3__ (VertCoin [VTC])
+ * ✓ __minotaur__ (Ring [RNG])
+ * ✓ __minotaurx__ (Avian[AVN], Litecash[LCC], Mazacoin[MAZA])
  * ✓ __myr-gr__ Myriad-Groestl (MyriadCoin [MYR])
  * ✓ __neoscrypt__ (Feathercoin)
  * ✓ __nist5__ (MistCoin [MIC], TalkCoin [TAC], ...)

@@ -107,6 +107,7 @@ cpuminer_SOURCES = \
   algo/timetravel.c \
   algo/tribus.c \
   algo/veltor.c \
+  algo/x5.c \
   algo/x11evo.c \
   algo/x11.c \
   algo/x11k.c \
